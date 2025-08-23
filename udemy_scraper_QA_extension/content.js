@@ -15,15 +15,15 @@
 
     // Comuns
     questionPrompt: '#question-prompt, [id="question-prompt"]',
-    answerPane: '.result-pane--answer-result-pane--Niazi',
+    answerPane: '[class*="result-pane--answer-result-pane"]',
     answerText:
       '#answer-text, [id="answer-text"], .answer-result-pane--answer-body--cDGY6 [data-purpose*="rich-text-viewer:html"], [data-purpose="answer-body"] [data-purpose*="rich-text-viewer:html"]',
     explanation: '#overall-explanation, [id="overall-explanation"]',
     domainPane: '[data-purpose="domain-pane"]',
 
     // Página de revisão (lista de todas as questões)
-    reviewQuestion: '.question-result--question-result--LWiOB',
-    reviewAnswerCorrectFlag: '.answer-result-pane--answer-correct--PLOEU'
+    reviewQuestion: '[class*="question-result--question-result"]',
+    reviewAnswerCorrectFlag: '[class*="answer-result-pane--answer-correct"]'
   };
 
   // ---------- Painel ----------
