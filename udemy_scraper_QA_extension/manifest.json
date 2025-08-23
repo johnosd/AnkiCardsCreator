@@ -1,0 +1,21 @@
+{
+"manifest_version": 3,
+"name": "udemy_scraper_QA_extension",
+"description": "Extrai perguntas respondidas e respostas corretas de simulados da Udemy e exporta em JSON.",
+"version": "0.1.1",
+"permissions": ["scripting", "activeTab"],
+"host_permissions": ["*://*.udemy.com/*"],
+"icons": {
+"16": "icons/icon16.png",
+"48": "icons/icon16.png",
+"128": "icons/icon16.png"
+},
+"content_scripts": [
+{
+"matches": ["*://*.udemy.com/*"],
+"js": ["content.js"],
+"run_at": "document_idle",
+"all_frames": true
+}
+]
+}
