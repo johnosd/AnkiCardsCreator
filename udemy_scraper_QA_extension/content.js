@@ -22,8 +22,9 @@
     domainPane: '[data-purpose="domain-pane"]',
 
     // Página de revisão (lista de todas as questões)
-    reviewQuestion: '[class*="question-result--question-result"]',
-    reviewAnswerCorrectFlag: '[class*="answer-result-pane--answer-correct"]'
+
+    reviewQuestion: '.question-result--question-result--LWiOB',
+    answerCorrectFlag: '[class*="answer-result-pane--answer-correct"]'
   };
 
   // ---------- Painel ----------
@@ -178,9 +179,11 @@
   function findCorrectAnswerTexts() {
     const panes = Array.from(document.querySelectorAll(SELECTORS.answerPane));
     const out = [];
+    const useTextFallback = !panes.some(p => p.querySelector(SELECTORS.answerCorrectFlag));
     for (const pane of panes) {
+      const hasCorrectFlag = !!pane.querySelector(SELECTORS.answerCorrectFlag);
       const txt = (pane.textContent || '').toLowerCase();
-      if (/\bcorreta\b/.test(txt) && !/incorreta/.test(txt)) {
+      if (hasCorrectFlag || (useTextFallback && /\bcorreta\b/.test(txt) && !/incorreta/.test(txt))) {
         const aNode = pane.querySelector(SELECTORS.answerText);
         const aText = getText(aNode);
         if (aText) out.push(aText);
@@ -211,10 +214,11 @@
   function findCorrectAnswersInBlock(block) {
     const panes = Array.from(block.querySelectorAll(SELECTORS.answerPane));
     const outs = [];
+    const useTextFallback = !panes.some(p => p.querySelector(SELECTORS.answerCorrectFlag));
     for (const pane of panes) {
-      const hasCorrectFlag = !!pane.querySelector(SELECTORS.reviewAnswerCorrectFlag);
+      const hasCorrectFlag = !!pane.querySelector(SELECTORS.answerCorrectFlag);
       const txt = (pane.textContent || '').toLowerCase();
-      if (hasCorrectFlag || (txt.includes('correta') && !txt.includes('incorreta'))) {
+      if (hasCorrectFlag || (useTextFallback && txt.includes('correta') && !txt.includes('incorreta'))) {
         const aNode =
           pane.querySelector(SELECTORS.answerText) ||
           pane.querySelector('[id="answer-text"]') ||
