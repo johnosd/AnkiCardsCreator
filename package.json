@@ -1,0 +1,10 @@
+{
+  "name": "anki-cards-creator",
+  "version": "1.0.0",
+  "scripts": {
+    "test": "node test/findCorrectAnswers.test.js"
+  },
+  "devDependencies": {
+    "jsdom": "^22.1.0"
+  }
+}

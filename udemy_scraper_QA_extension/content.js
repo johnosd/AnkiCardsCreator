@@ -15,15 +15,16 @@
 
     // Comuns
     questionPrompt: '#question-prompt, [id="question-prompt"]',
-    answerPane: '.result-pane--answer-result-pane--Niazi',
+    answerPane: '[class*="result-pane--answer-result-pane"]',
     answerText:
       '#answer-text, [id="answer-text"], .answer-result-pane--answer-body--cDGY6 [data-purpose*="rich-text-viewer:html"], [data-purpose="answer-body"] [data-purpose*="rich-text-viewer:html"]',
     explanation: '#overall-explanation, [id="overall-explanation"]',
     domainPane: '[data-purpose="domain-pane"]',
 
     // Página de revisão (lista de todas as questões)
+
     reviewQuestion: '.question-result--question-result--LWiOB',
-    reviewAnswerCorrectFlag: '.answer-result-pane--answer-correct--PLOEU'
+    answerCorrectFlag: '[class*="answer-result-pane--answer-correct"]'
   };
 
   // ---------- Painel ----------
@@ -178,9 +179,11 @@
   function findCorrectAnswerTexts() {
     const panes = Array.from(document.querySelectorAll(SELECTORS.answerPane));
     const out = [];
+    const useTextFallback = !panes.some(p => p.querySelector(SELECTORS.answerCorrectFlag));
     for (const pane of panes) {
+      const hasCorrectFlag = !!pane.querySelector(SELECTORS.answerCorrectFlag);
       const txt = (pane.textContent || '').toLowerCase();
-      if (/\bcorreta\b/.test(txt) && !/incorreta/.test(txt)) {
+      if (hasCorrectFlag || (useTextFallback && /\bcorreta\b/.test(txt) && !/incorreta/.test(txt))) {
         const aNode = pane.querySelector(SELECTORS.answerText);
         const aText = getText(aNode);
         if (aText) out.push(aText);
@@ -211,10 +214,11 @@
   function findCorrectAnswersInBlock(block) {
     const panes = Array.from(block.querySelectorAll(SELECTORS.answerPane));
     const outs = [];
+    const useTextFallback = !panes.some(p => p.querySelector(SELECTORS.answerCorrectFlag));
     for (const pane of panes) {
-      const hasCorrectFlag = !!pane.querySelector(SELECTORS.reviewAnswerCorrectFlag);
+      const hasCorrectFlag = !!pane.querySelector(SELECTORS.answerCorrectFlag);
       const txt = (pane.textContent || '').toLowerCase();
-      if (hasCorrectFlag || (txt.includes('correta') && !txt.includes('incorreta'))) {
+      if (hasCorrectFlag || (useTextFallback && txt.includes('correta') && !txt.includes('incorreta'))) {
         const aNode =
           pane.querySelector(SELECTORS.answerText) ||
           pane.querySelector('[id="answer-text"]') ||
