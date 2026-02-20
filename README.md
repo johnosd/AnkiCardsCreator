@@ -135,21 +135,14 @@ python app/src/anki.py
 
 ### 4) Salvar em `AnkiMedia/words.tsv`
 
-No PowerShell, a partir da raiz do projeto:
+1. Crie um AgenteGPT e use como base o prompt em `prompts/prompt_anki_deck_generator.md`.
+2. Cole no AgenteGPT a lista de palavras/frases capturadas (do TXT exportado pela extensao).
+3. Aguarde a resposta do AgenteGPT no formato `.tsv`.
+4. Copie o conteudo retornado e salve em `app/src/AnkiMedia/words.tsv`.
+5. Rode o gerador de midia para criar os arquivos de audio/imagem:
 
 ```powershell
-# ajuste o caminho de Downloads se necessario
-Copy-Item "$env:USERPROFILE\Downloads\captured_words_phrases.txt" "app\src\AnkiMedia\words.tsv" -Force
-```
-
-Opcional (remover linhas vazias e duplicadas, mantendo 1 item por linha):
-
-```powershell
-Get-Content "app\src\AnkiMedia\words.tsv" |
-  ForEach-Object { $_.Trim() } |
-  Where-Object { $_ -ne "" } |
-  Sort-Object -Unique |
-  Set-Content "app\src\AnkiMedia\words.tsv"
+python app/src/bulki_anki_media.py
 ```
 
 ## Observacoes importantes
