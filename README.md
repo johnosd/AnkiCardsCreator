@@ -1,66 +1,114 @@
-# Anki Cards Creator
+﻿# AnkiCardsCreator
 
-Este projeto é um conjunto de ferramentas para automatizar a criação, enriquecimento e geração de mídia para flashcards do Anki, especialmente para vocabulário em inglês. Ele integra APIs de IA (OpenAI), TTS (text-to-speech), manipulação de imagens e a API AnkiConnect para facilitar a criação de decks ricos e multimídia.
+Ferramentas para criar baralhos de vocabulario no Anki com pipeline automatizado:
+
+1. enriquecer palavras com IA;
+2. gerar midia (audio + imagem) em lote;
+3. enviar cards para o Anki via AnkiConnect;
+4. capturar frases/palavras e perguntas de extensoes de navegador.
 
 ## Funcionalidades
 
-### 1. Enriquecimento de Vocabulário (`vocab_enricher.py`)
-- Recebe uma lista de palavras em inglês e utiliza a API da OpenAI para gerar:
-  - Transcrição fonética (IPA)
-  - Classe gramatical (substantivo, verbo, etc.)
-  - Definição curta e simples
-  - Exemplo de uso profissional
-  - Tags temáticas e de nível
-  - Notas de uso
-- Salva o resultado em JSON estruturado, pronto para pipeline de mídia e importação no Anki.
+### 1) Enriquecimento de vocabulario (`app/src/vocab_enricher.py`)
+- Recebe lista de palavras em ingles.
+- Gera para cada item: `word`, `ipa`, `pos`, `meaning`, `example`, `tags`, `notes`.
+- Usa OpenAI com configuracao de nivel (`C1` por padrao), dialeto e tamanho maximo de lote.
+- Retorna JSON pronto para o fluxo de midia/importacao.
 
-### 2. Geração de Mídia em Lote (`bulki_anki_media.py`)
-- Lê um arquivo JSON com cards enriquecidos.
-- Gera arquivos de áudio (palavra, significado, exemplo) usando TTS (edge_tts).
-- Cria imagens placeholder para cada palavra.
-- Organiza todos os arquivos de mídia em pastas datadas, prontos para serem usados no Anki.
+### 2) Geracao de midia (`app/src/bulki_anki_media.py`)
+- Le `AnkiMedia/cards.json`.
+- Gera TTS com `edge_tts` para:
+  - pronuncia da palavra (`word_*.mp3`);
+  - significado (`meaning_*.mp3`);
+  - exemplo (`example_*.mp3`).
+- Gera imagem placeholder (`img_*.jpg`) com Pillow.
+- Cria pasta datada em `AnkiMedia/<timestamp>/` e copia:
+  - todos os arquivos de midia;
+  - backup de `cards.json`;
+  - backup de `50_words_c1.tsv` (se existir).
 
-### 3. Transcrição de Áudio (`transcribe_meaning.py`)
-- Converte arquivos MP3 para WAV e transcreve o áudio usando a API do Google Speech Recognition.
-- Útil para validar ou gerar textos a partir de áudios dos cards.
+### 3) Integracao com Anki (`app/src/anki.py`)
+- Wrapper para API do AnkiConnect (`http://localhost:8765`).
+- Lista modelos e campos do modelo.
+- Cria deck (`ensure_deck`).
+- Cria card unico (`anki_create_card`) com tentativa automatica de mapear campos `Front/Back` e `Frente/Verso`.
+- Cria cards em lote (`anki_create_cards_batch`) com opcao para ignorar duplicados.
 
-### 4. Integração com Anki (`anki.py` e notebook)
-- Funções para criar decks, adicionar cards individualmente ou em lote via AnkiConnect.
-- Suporte a modelos de card em português e inglês.
-- Normalização de tags e tratamento de duplicatas.
+### 4) Transcricao de audio (`app/src/transcribe_meaning.py`)
+- Converte MP3 para WAV (`pydub`).
+- Transcreve com Google Speech Recognition (`speech_recognition`).
+- Util para validar audio gerado.
 
-### 5. Exemplo de Uso e Testes
-- `anki_cartds_creator.ipynb`: Notebook com exemplos de uso das funções principais.
-- `test_vocab_enricher.py`: Exemplo de teste do enriquecimento de vocabulário.
+### 5) Extensao Chrome: Word & Phrase Catcher (`app/word_frases_catcher`)
+- Captura selecao de texto:
+  - duplo clique;
+  - atalho `Ctrl+Shift+Y`.
+- Salva localmente na extensao.
+- Exporta lista para TXT.
+- Permite limpar lista capturada.
 
-## Como Usar
+### 6) Extensao Chrome: Udemy QA Scraper (`app/udemy_scraper_QA_extension`)
+- Extrai perguntas/respostas corretas de simulados da Udemy.
+- Funciona em modo sidebar e pagina de revisao.
+- Mostra painel com status, contadores e log.
+- Exporta JSON para uso posterior no pipeline de cards.
 
-1. **Enriquecer vocabulário:**
-   - Edite/execute `vocab_enricher.py` com sua lista de palavras.
-   - Salve o JSON gerado.
-2. **Gerar mídia:**
-   - Execute `bulki_anki_media.py` para criar áudios e imagens.
-   - Os arquivos serão salvos em `generated_media/` e copiados para a pasta de mídia do Anki.
-3. **Importar para o Anki:**
-   - Use as funções de `anki.py` ou o notebook para criar decks e importar cards.
-4. **Transcrever áudios (opcional):**
-   - Use `transcribe_meaning.py` para obter texto a partir de arquivos de áudio.
+## Estrutura principal
+
+- `app/src/`: scripts Python principais.
+- `app/tests/`: teste/exemplo simples do enriquecimento.
+- `app/word_frases_catcher/`: extensao para capturar palavras/frases.
+- `app/udemy_scraper_QA_extension/`: extensao para extrair QA da Udemy.
+- `AnkiMedia/`: entrada e saida de dados de cards/midia.
+- `app/Sample/`: exemplos de JSON/TSV e templates de card.
 
 ## Requisitos
-- Python 3.8+
-- Pacotes: `openai`, `edge_tts`, `Pillow`, `speech_recognition`, `pydub`, `requests`, `pandas`
-- Anki com o plugin [AnkiConnect](https://ankiweb.net/shared/info/2055492159) instalado e rodando
 
-## Estrutura de Pastas
-- `AnkiMedia/`: Pasta de mídia e arquivos de cards
-- `generated_media/`: Arquivos de mídia gerados
-- `Sample/`: Exemplos de arquivos e templates
+- Python 3.10+ recomendado.
+- Dependencias Python:
+  - `openai`
+  - `edge-tts`
+  - `Pillow`
+  - `requests`
+  - `speechrecognition`
+  - `pydub`
+  - `pandas` (atualmente nao essencial)
+- `ffmpeg` instalado (necessario para `pydub` converter MP3 -> WAV).
+- Anki Desktop com addon AnkiConnect ativo.
+- Para enriquecimento com IA: variavel `OPENAI_API_KEY`.
 
-## Observações
-- Configure sua chave da OpenAI em `vocab_enricher.py`.
-- Ajuste o caminho da pasta de mídia do Anki em `bulki_anki_media.py`.
-- Os scripts são modulares e podem ser usados separadamente ou em pipeline.
+## Setup rapido
 
----
+```bash
+python -m venv .venv
+.venv\Scripts\activate
+pip install openai edge-tts Pillow requests speechrecognition pydub pandas
+```
 
-Este projeto facilita a criação de decks de Anki ricos em conteúdo e mídia, acelerando o aprendizado de vocabulário com apoio de IA e automação.
+Configure a chave da OpenAI no terminal (PowerShell):
+
+```powershell
+$env:OPENAI_API_KEY="sua_chave_aqui"
+```
+
+## Fluxo recomendado (fim a fim)
+
+1. Gerar/enriquecer vocabulario em JSON com `app/src/vocab_enricher.py`.
+2. Salvar o resultado em `AnkiMedia/cards.json`.
+3. Gerar midia com `app/src/bulki_anki_media.py`.
+4. Importar cards para Anki com funcoes de `app/src/anki.py` (ou via TSV/JSON no seu fluxo).
+
+## Exemplos de execucao
+
+```bash
+python app/src/vocab_enricher.py
+python app/src/bulki_anki_media.py
+python app/src/transcribe_meaning.py
+python app/src/anki.py
+```
+
+## Observacoes importantes
+
+- Os scripts usam caminhos relativos em alguns pontos; execute a partir da raiz do projeto para evitar erro de caminho.
+- O teste em `app/tests/test_vocab_enricher.py` esta mais proximo de um exemplo de uso do que de um teste unitario completo.
+- O projeto contem muitos artefatos de midia gerados; considere versionar apenas exemplos e ignorar saidas grandes no Git.
