@@ -1,5 +1,5 @@
-function sendTogglePanel(tabId, callback) {
-  chrome.tabs.sendMessage(tabId, { action: "toggle_panel" }, () => {
+function sendOpenPanel(tabId, callback) {
+  chrome.tabs.sendMessage(tabId, { action: "open_panel" }, () => {
     callback(chrome.runtime.lastError);
   });
 }
@@ -9,7 +9,7 @@ chrome.action.onClicked.addListener((tab) => {
     return;
   }
 
-  sendTogglePanel(tab.id, (sendError) => {
+  sendOpenPanel(tab.id, (sendError) => {
     if (!sendError) {
       return;
     }
@@ -26,7 +26,7 @@ chrome.action.onClicked.addListener((tab) => {
           return;
         }
 
-        sendTogglePanel(tab.id, (retryError) => {
+        sendOpenPanel(tab.id, (retryError) => {
           if (retryError) {
             console.warn("Falha ao abrir painel apos injecao:", retryError.message);
           }

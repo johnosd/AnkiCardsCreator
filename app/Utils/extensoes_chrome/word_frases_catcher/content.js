@@ -1,8 +1,9 @@
 (() => {
-if (window.__wpcInitialized) {
+const INIT_ATTR = "data-wpc-initialized";
+if (document.documentElement.hasAttribute(INIT_ATTR)) {
   return;
 }
-window.__wpcInitialized = true;
+document.documentElement.setAttribute(INIT_ATTR, "1");
 
 const PANEL_ID = "wpc-floating-panel";
 let panelEl = null;
@@ -47,6 +48,13 @@ async function refreshList() {
 }
 
 function createPanel() {
+  const existingPanel = document.getElementById(PANEL_ID);
+  if (existingPanel) {
+    panelEl = existingPanel;
+    textareaEl = panelEl.querySelector("#wpc-captured");
+    return panelEl;
+  }
+
   if (panelEl) {
     return panelEl;
   }
@@ -67,8 +75,16 @@ function createPanel() {
       font-family: Arial, sans-serif;
       color: #111827;
     }
+    #${PANEL_ID} .wpc-drag-handle {
+      margin: -4px -4px 8px -4px;
+      padding: 6px 8px;
+      cursor: move;
+      user-select: none;
+      border-radius: 8px;
+      background: #f3f4f6;
+    }
     #${PANEL_ID} h3 {
-      margin: 0 0 8px 0;
+      margin: 0;
       font-size: 15px;
     }
     #${PANEL_ID} textarea {
@@ -101,7 +117,9 @@ function createPanel() {
   panelEl.id = PANEL_ID;
   panelEl.style.display = "none";
   panelEl.innerHTML = `
-    <h3>Word & Phrase Catcher</h3>
+    <div class="wpc-drag-handle">
+      <h3>Word & Phrase Catcher</h3>
+    </div>
     <textarea id="wpc-captured" readonly></textarea>
     <div class="wpc-actions">
       <button id="wpc-export">Exportar TXT</button>
@@ -133,23 +151,75 @@ function createPanel() {
     panelEl.style.display = "none";
   });
 
+  const dragHandle = panelEl.querySelector(".wpc-drag-handle");
+  setupDragging(panelEl, dragHandle);
+
   refreshList();
   return panelEl;
 }
 
-function togglePanel() {
+function setupDragging(panel, handle) {
+  let isDragging = false;
+  let offsetX = 0;
+  let offsetY = 0;
+
+  const onMouseMove = (e) => {
+    if (!isDragging) {
+      return;
+    }
+
+    const panelWidth = panel.offsetWidth;
+    const panelHeight = panel.offsetHeight;
+    const maxLeft = Math.max(0, window.innerWidth - panelWidth);
+    const maxTop = Math.max(0, window.innerHeight - panelHeight);
+    const nextLeft = Math.min(Math.max(0, e.clientX - offsetX), maxLeft);
+    const nextTop = Math.min(Math.max(0, e.clientY - offsetY), maxTop);
+
+    panel.style.left = `${nextLeft}px`;
+    panel.style.top = `${nextTop}px`;
+    panel.style.right = "auto";
+  };
+
+  const onMouseUp = () => {
+    if (!isDragging) {
+      return;
+    }
+    isDragging = false;
+    document.body.style.userSelect = "";
+  };
+
+  const onMouseDown = (e) => {
+    if (e.button !== 0) {
+      return;
+    }
+    isDragging = true;
+    const rect = panel.getBoundingClientRect();
+    offsetX = e.clientX - rect.left;
+    offsetY = e.clientY - rect.top;
+    document.body.style.userSelect = "none";
+    e.preventDefault();
+  };
+
+  handle.addEventListener("mousedown", onMouseDown);
+  window.addEventListener("mousemove", onMouseMove);
+  window.addEventListener("mouseup", onMouseUp);
+
+  return () => {
+    handle.removeEventListener("mousedown", onMouseDown);
+    window.removeEventListener("mousemove", onMouseMove);
+    window.removeEventListener("mouseup", onMouseUp);
+  };
+}
+
+function openPanel() {
   const panel = createPanel();
-  if (panel.style.display === "none") {
-    panel.style.display = "block";
-    refreshList();
-    return;
-  }
-  panel.style.display = "none";
+  panel.style.display = "block";
+  refreshList();
 }
 
 chrome.runtime.onMessage.addListener((msg) => {
-  if (msg.action === "toggle_panel") {
-    togglePanel();
+  if (msg.action === "open_panel" || msg.action === "toggle_panel") {
+    openPanel();
   }
 });
 
