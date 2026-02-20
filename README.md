@@ -39,7 +39,7 @@ Ferramentas para criar baralhos de vocabulario no Anki com pipeline automatizado
 - Transcreve com Google Speech Recognition (`speech_recognition`).
 - Util para validar audio gerado.
 
-### 5) Extensao Chrome: Word & Phrase Catcher (`app/word_frases_catcher`)
+### 5) Extensao Chrome: Word & Phrase Catcher (`app/Utils/extensoes_chrome/word_catcher`)
 - Captura selecao de texto:
   - duplo clique;
   - atalho `Ctrl+Shift+Y`.
@@ -47,7 +47,7 @@ Ferramentas para criar baralhos de vocabulario no Anki com pipeline automatizado
 - Exporta lista para TXT.
 - Permite limpar lista capturada.
 
-### 6) Extensao Chrome: Udemy QA Scraper (`app/udemy_scraper_QA_extension`)
+### 6) Extensao Chrome: Udemy QA Scraper (`app/Utils/extensoes_chrome/udemy_scraper_QA_extension`)
 - Extrai perguntas/respostas corretas de simulados da Udemy.
 - Funciona em modo sidebar e pagina de revisao.
 - Mostra painel com status, contadores e log.
@@ -57,8 +57,8 @@ Ferramentas para criar baralhos de vocabulario no Anki com pipeline automatizado
 
 - `app/src/`: scripts Python principais.
 - `app/tests/`: teste/exemplo simples do enriquecimento.
-- `app/word_frases_catcher/`: extensao para capturar palavras/frases.
-- `app/udemy_scraper_QA_extension/`: extensao para extrair QA da Udemy.
+- `app/Utils/extensoes_chrome/word_catcher/`: extensao para capturar palavras/frases.
+- `app/Utils/extensoes_chrome/udemy_scraper_QA_extension/`: extensao para extrair QA da Udemy.
 - `AnkiMedia/`: entrada e saida de dados de cards/midia.
 - `app/Sample/`: exemplos de JSON/TSV e templates de card.
 
@@ -105,6 +105,51 @@ python app/src/vocab_enricher.py
 python app/src/bulki_anki_media.py
 python app/src/transcribe_meaning.py
 python app/src/anki.py
+```
+
+## Como usar a extensao `word_catcher` (Chrome)
+
+### 1) Adicionar no Chrome (modo desenvolvedor)
+
+1. Abra `chrome://extensions/`.
+2. Ative `Developer mode` (canto superior direito).
+3. Clique em `Load unpacked`.
+4. Selecione a pasta `app/Utils/extensoes_chrome/word_catcher`.
+5. A extensao `Word & Phrase Catcher` vai aparecer na lista.
+
+### 2) Capturar palavras/frases
+
+1. Abra qualquer pagina no Chrome.
+2. Selecione um texto com o mouse (ao soltar, a extensao captura).
+3. Opcional: use `Ctrl+Shift+Y` para capturar a selecao atual.
+4. Clique no icone da extensao para abrir o painel flutuante.
+5. No painel, voce pode:
+   - revisar a lista capturada;
+   - `Exportar TXT`;
+   - `Limpar`.
+
+### 3) Exportar os dados
+
+1. No painel da extensao, clique em `Exportar TXT`.
+2. O Chrome baixa o arquivo `captured_words_phrases.txt` (uma linha por item).
+
+### 4) Salvar em `AnkiMedia/words.tsv`
+
+No PowerShell, a partir da raiz do projeto:
+
+```powershell
+# ajuste o caminho de Downloads se necessario
+Copy-Item "$env:USERPROFILE\Downloads\captured_words_phrases.txt" "app\src\AnkiMedia\words.tsv" -Force
+```
+
+Opcional (remover linhas vazias e duplicadas, mantendo 1 item por linha):
+
+```powershell
+Get-Content "app\src\AnkiMedia\words.tsv" |
+  ForEach-Object { $_.Trim() } |
+  Where-Object { $_ -ne "" } |
+  Sort-Object -Unique |
+  Set-Content "app\src\AnkiMedia\words.tsv"
 ```
 
 ## Observacoes importantes
