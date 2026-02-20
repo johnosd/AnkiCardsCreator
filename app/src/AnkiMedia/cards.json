@@ -1,0 +1,352 @@
+[
+{
+"Word": "stakeholder",
+"Meaning": "A stakeholder is a person or group affected by a project or decision.",
+"Example": "We shared the plan with every stakeholder before starting.",
+"IPA": "/ˈsteɪkˌhoʊldər/",
+"slug": "stakeholder"
+},
+{
+"Word": "roadmap",
+"Meaning": "A roadmap is a plan that shows goals and steps over time.",
+"Example": "The product roadmap lists features for the next six months.",
+"IPA": "/ˈroʊdˌmæp/",
+"slug": "roadmap"
+},
+{
+"Word": "governance",
+"Meaning": "Governance is how rules, roles, and decisions are managed in an organization.",
+"Example": "Good governance makes responsibilities clear for everyone.",
+"IPA": "/ˈɡʌvərnəns/",
+"slug": "governance"
+},
+{
+"Word": "compliance",
+"Meaning": "Compliance means following laws, rules, or standards.",
+"Example": "The team updated the process to meet compliance requirements.",
+"IPA": "/kəmˈplaɪəns/",
+"slug": "compliance"
+},
+{
+"Word": "scalability",
+"Meaning": "Scalability is the ability to grow and handle more work without failing.",
+"Example": "We improved scalability so the app can support more users.",
+"IPA": "/ˌskeɪləˈbɪləti/",
+"slug": "scalability"
+},
+{
+"Word": "interoperability",
+"Meaning": "Interoperability is the ability of systems to work together and share data.",
+"Example": "Interoperability helps different tools exchange information easily.",
+"IPA": "/ˌɪntərˌɑːpərəˈbɪləti/",
+"slug": "interoperability"
+},
+{
+"Word": "architecture",
+"Meaning": "Architecture is the overall design of a system and how parts connect.",
+"Example": "The new architecture separates data storage from processing.",
+"IPA": "/ˈɑːrkɪˌtɛktʃər/",
+"slug": "architecture"
+},
+{
+"Word": "orchestration",
+"Meaning": "Orchestration is coordinating many tasks or services to work as one process.",
+"Example": "Orchestration starts each service in the right order.",
+"IPA": "/ˌɔːrkəˈstreɪʃən/",
+"slug": "orchestration"
+},
+{
+"Word": "observability",
+"Meaning": "Observability is how well you can understand a system using logs, metrics, and traces.",
+"Example": "Better observability helped us find the bug quickly.",
+"IPA": "/əbˌzɝːvəˈbɪləti/",
+"slug": "observability"
+},
+{
+"Word": "resilience",
+"Meaning": "Resilience is the ability to recover after problems or failures.",
+"Example": "Resilience keeps the service running during small outages.",
+"IPA": "/rɪˈzɪliəns/",
+"slug": "resilience"
+},
+{
+"Word": "redundancy",
+"Meaning": "Redundancy means having extra parts so a system still works if something fails.",
+"Example": "We added redundancy by using two servers instead of one.",
+"IPA": "/rɪˈdʌndənsi/",
+"slug": "redundancy"
+},
+{
+"Word": "throughput",
+"Meaning": "Throughput is how much work a system can handle in a given time.",
+"Example": "After the change, throughput increased during peak hours.",
+"IPA": "/ˈθruːˌpʊt/",
+"slug": "throughput"
+},
+{
+"Word": "latency",
+"Meaning": "Latency is the delay between a request and the response.",
+"Example": "High latency made the page feel slow.",
+"IPA": "/ˈleɪtənsi/",
+"slug": "latency"
+},
+{
+"Word": "instrumentation",
+"Meaning": "Instrumentation is adding tools to measure how a system behaves.",
+"Example": "Instrumentation lets us track errors and response times.",
+"IPA": "/ˌɪnstrəmenˈteɪʃən/",
+"slug": "instrumentation"
+},
+{
+"Word": "telemetry",
+"Meaning": "Telemetry is data automatically collected from systems to monitor performance.",
+"Example": "Telemetry showed a spike in memory use after the update.",
+"IPA": "/təˈlɛmɪtri/",
+"slug": "telemetry"
+},
+{
+"Word": "benchmarking",
+"Meaning": "Benchmarking is testing performance and comparing results to a standard.",
+"Example": "We used benchmarking to compare two database options.",
+"IPA": "/ˈbɛntʃˌmɑːrkɪŋ/",
+"slug": "benchmarking"
+},
+{
+"Word": "optimization",
+"Meaning": "Optimization is improving something to work faster, cheaper, or better.",
+"Example": "Optimization reduced the time needed to process orders.",
+"IPA": "/ˌɑːptɪməˈzeɪʃən/",
+"slug": "optimization"
+},
+{
+"Word": "refactoring",
+"Meaning": "Refactoring is changing code to make it cleaner without changing what it does.",
+"Example": "Refactoring made the code easier to maintain.",
+"IPA": "/riːˈfæktərɪŋ/",
+"slug": "refactoring"
+},
+{
+"Word": "deprecation",
+"Meaning": "Deprecation is when a feature is still available but planned to be removed later.",
+"Example": "We announced deprecation of the old API version.",
+"IPA": "/ˌdɛprəˈkeɪʃən/",
+"slug": "deprecation"
+},
+{
+"Word": "migration",
+"Meaning": "Migration is moving data, users, or systems from one place to another.",
+"Example": "The migration to the new server finished overnight.",
+"IPA": "/maɪˈɡreɪʃən/",
+"slug": "migration"
+},
+{
+"Word": "modernization",
+"Meaning": "Modernization is updating systems or processes to use newer methods and tools.",
+"Example": "Modernization helped us replace old software safely.",
+"IPA": "/ˌmɑːdərnəˈzeɪʃən/",
+"slug": "modernization"
+},
+{
+"Word": "containerization",
+"Meaning": "Containerization packages an app with its needs so it runs the same everywhere.",
+"Example": "Containerization made deployment faster and more consistent.",
+"IPA": "/kənˌteɪnərɪˈzeɪʃən/",
+"slug": "containerization"
+},
+{
+"Word": "virtualization",
+"Meaning": "Virtualization is running virtual machines on a physical computer.",
+"Example": "Virtualization let us run several servers on one machine.",
+"IPA": "/ˌvɝːtʃuələˈzeɪʃən/",
+"slug": "virtualization"
+},
+{
+"Word": "provisioning",
+"Meaning": "Provisioning is setting up resources like servers, accounts, or access.",
+"Example": "Provisioning a new environment takes only a few minutes now.",
+"IPA": "/prəˈvɪʒənɪŋ/",
+"slug": "provisioning"
+},
+{
+"Word": "automation",
+"Meaning": "Automation uses tools to do tasks with little human effort.",
+"Example": "Automation sends reports every morning automatically.",
+"IPA": "/ˌɔːtəˈmeɪʃən/",
+"slug": "automation"
+},
+{
+"Word": "integration",
+"Meaning": "Integration is connecting systems so they work together.",
+"Example": "The integration with payments reduced manual work.",
+"IPA": "/ˌɪntɪˈɡreɪʃən/",
+"slug": "integration"
+},
+{
+"Word": "consolidation",
+"Meaning": "Consolidation is combining things into one to simplify management.",
+"Example": "Consolidation reduced costs by merging two platforms.",
+"IPA": "/kənˌsɑːlɪˈdeɪʃən/",
+"slug": "consolidation"
+},
+{
+"Word": "standardization",
+"Meaning": "Standardization means using the same rules or methods across a group.",
+"Example": "Standardization made training easier for new employees.",
+"IPA": "/ˌstændərdɪˈzeɪʃən/",
+"slug": "standardization"
+},
+{
+"Word": "harmonization",
+"Meaning": "Harmonization is making different policies or systems work well together.",
+"Example": "Harmonization aligned our teams on one set of terms.",
+"IPA": "/ˌhɑːrmənəˈzeɪʃən/",
+"slug": "harmonization"
+},
+{
+"Word": "segmentation",
+"Meaning": "Segmentation is dividing users or markets into groups with similar needs.",
+"Example": "Segmentation helped us target messages to each group.",
+"IPA": "/ˌsɛɡmənˈteɪʃən/",
+"slug": "segmentation"
+},
+{
+"Word": "personalization",
+"Meaning": "Personalization is adapting content or services to an individual user.",
+"Example": "Personalization shows products based on your interests.",
+"IPA": "/ˌpɝːsənələˈzeɪʃən/",
+"slug": "personalization"
+},
+{
+"Word": "monetization",
+"Meaning": "Monetization is turning a product or service into a source of income.",
+"Example": "Monetization improved after we launched a paid plan.",
+"IPA": "/ˌmʌnətaɪˈzeɪʃən/",
+"slug": "monetization"
+},
+{
+"Word": "profitability",
+"Meaning": "Profitability is the ability to make more money than you spend.",
+"Example": "Profitability increased when costs went down.",
+"IPA": "/ˌprɑːfɪtəˈbɪləti/",
+"slug": "profitability"
+},
+{
+"Word": "forecasting",
+"Meaning": "Forecasting is predicting future results using current and past data.",
+"Example": "Forecasting suggests sales will rise next quarter.",
+"IPA": "/ˈfɔːrˌkæstɪŋ/",
+"slug": "forecasting"
+},
+{
+"Word": "valuation",
+"Meaning": "Valuation is estimating how much something is worth.",
+"Example": "The startup’s valuation grew after the new investment.",
+"IPA": "/ˌvæljuˈeɪʃən/",
+"slug": "valuation"
+},
+{
+"Word": "liquidity",
+"Meaning": "Liquidity is how easily assets can be turned into cash.",
+"Example": "We kept extra cash to improve liquidity.",
+"IPA": "/lɪˈkwɪdəti/",
+"slug": "liquidity"
+},
+{
+"Word": "solvency",
+"Meaning": "Solvency is the ability to pay long-term debts and stay financially stable.",
+"Example": "Strong cash flow supports solvency during hard times.",
+"IPA": "/ˈsɑːlvənsi/",
+"slug": "solvency"
+},
+{
+"Word": "amortization",
+"Meaning": "Amortization is paying off a loan in regular payments over time.",
+"Example": "The schedule shows amortization for the next five years.",
+"IPA": "/əˌmɔːrtɪˈzeɪʃən/",
+"slug": "amortization"
+},
+{
+"Word": "capitalization",
+"Meaning": "Capitalization is the total value of a company or the act of funding it.",
+"Example": "The company’s market capitalization rose after strong earnings.",
+"IPA": "/ˌkæpɪtələˈzeɪʃən/",
+"slug": "capitalization"
+},
+{
+"Word": "arbitrage",
+"Meaning": "Arbitrage is making profit from price differences in different markets.",
+"Example": "Traders used arbitrage when the same asset had two prices.",
+"IPA": "/ˈɑːrbɪtrɑːʒ/",
+"slug": "arbitrage"
+},
+{
+"Word": "procurement",
+"Meaning": "Procurement is the process of buying goods or services for a business.",
+"Example": "Procurement negotiated better prices with suppliers.",
+"IPA": "/prəˈkjʊrmənt/",
+"slug": "procurement"
+},
+{
+"Word": "outsourcing",
+"Meaning": "Outsourcing is paying an outside company to do certain work.",
+"Example": "We used outsourcing for customer support during weekends.",
+"IPA": "/ˈaʊtˌsɔːrsɪŋ/",
+"slug": "outsourcing"
+},
+{
+"Word": "partnership",
+"Meaning": "A partnership is a relationship where two sides work together for shared goals.",
+"Example": "The partnership with the vendor improved delivery times.",
+"IPA": "/ˈpɑːrtnərʃɪp/",
+"slug": "partnership"
+},
+{
+"Word": "collaboration",
+"Meaning": "Collaboration is working together to achieve a result.",
+"Example": "Collaboration between teams reduced duplicate work.",
+"IPA": "/kəˌlæbəˈreɪʃən/",
+"slug": "collaboration"
+},
+{
+"Word": "negotiation",
+"Meaning": "Negotiation is discussing to reach an agreement.",
+"Example": "After negotiation, both sides accepted the new contract.",
+"IPA": "/nɪˌɡoʊʃiˈeɪʃən/",
+"slug": "negotiation"
+},
+{
+"Word": "confidentiality",
+"Meaning": "Confidentiality means keeping information private and not sharing it.",
+"Example": "Employees signed a policy on confidentiality.",
+"IPA": "/ˌkɑːnfɪˌdɛnʃiˈælɪti/",
+"slug": "confidentiality"
+},
+{
+"Word": "accountability",
+"Meaning": "Accountability means being responsible for actions and results.",
+"Example": "Accountability improved when owners were assigned to each task.",
+"IPA": "/əˌkaʊntəˈbɪləti/",
+"slug": "accountability"
+},
+{
+"Word": "auditability",
+"Meaning": "Auditability is how easily actions can be checked and verified later.",
+"Example": "We improved auditability by keeping clear change logs.",
+"IPA": "/ˌɔːdɪtəˈbɪləti/",
+"slug": "auditability"
+},
+{
+"Word": "attribution",
+"Meaning": "Attribution is identifying who caused or created a result.",
+"Example": "Attribution showed which campaign brought the new users.",
+"IPA": "/ˌætrɪˈbjuːʃən/",
+"slug": "attribution"
+},
+{
+"Word": "differentiation",
+"Meaning": "Differentiation is making something stand out from others.",
+"Example": "Our main differentiation is faster support and simpler pricing.",
+"IPA": "/ˌdɪfəˌrɛnʃiˈeɪʃən/",
+"slug": "differentiation"
+}
+]

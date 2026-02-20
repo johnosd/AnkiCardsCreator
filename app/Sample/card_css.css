@@ -1,0 +1,41 @@
+.card {
+  font-family: Arial, sans-serif;
+  font-size: 22px;
+  text-align: center;
+  color: #111;
+  background-color: #fff;
+}
+#rubric {
+  text-align: left;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+  background: #1d6695;
+  color: #fff;
+  font-weight: 600;
+}
+.w {
+  font-size: 60px;
+  color: #FF80DD;
+  font-weight: 700;
+}
+.ipa {
+  font-size: 38px;
+  color: #FF80DD;
+}
+.meaning {
+  font-size: 26px;
+  color: #00aaaa;
+  text-align: left;
+}
+.example {
+  font-size: 26px;
+  color: #9CFFFA;
+  text-align: left;
+}
+.audio { margin: 6px 0; }
+img{
+  max-width: 100%;
+  height: auto;
+  width: 300px;
+  border-radius: 20px;
+}
