@@ -5,9 +5,8 @@ import os
 import re
 from dataclasses import dataclass
 from typing import Any, Dict, List, Optional
-from openai import OpenAI
 
-from openai import OpenAI, api_key
+from openai import OpenAI
 
 @dataclass
 class EnrichConfig:
@@ -58,16 +57,11 @@ def enrich_words_to_json(
       ]
     }
     """
-     
-    other_api_key = "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"
-    my_api_key ='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'
-    api_key = my_api_key
-    #api_key = os.getenv("OPENAI_API_KEY")
-    
-    if not api_key and client is None:
-        raise RuntimeError("Missing OPENAI_API_KEY env var (or pass an OpenAI client).")
-
-    client = client or OpenAI(api_key=api_key)
+    if client is None:
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            raise RuntimeError("Missing OPENAI_API_KEY env var (or pass an OpenAI client).")
+        client = OpenAI(api_key=api_key)
 
     cleaned = _clean_words(words)
     if not cleaned:
